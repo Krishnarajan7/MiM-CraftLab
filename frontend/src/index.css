@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Pacifico&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  MimCraft Lab Design System
+  A warm, professional e-commerce design language
+  Premium craft aesthetic with modern elegance
+*/
+
+
+
+@layer base {
+  :root {
+    /* Warm off-white background */
+    --background: 40 20% 98%;
+    --foreground: 0 0% 12%;
+
+    /* Card surfaces */
+    --card: 40 15% 99%;
+    --card-foreground: 0 0% 12%;
+
+    /* Popover */
+    --popover: 40 15% 99%;
+    --popover-foreground: 0 0% 12%;
+
+    /* Terracotta accent - warm, craft-like */
+    --primary: 18 45% 55%;
+    --primary-foreground: 40 20% 98%;
+
+    /* Soft neutral secondary */
+    --secondary: 40 10% 94%;
+    --secondary-foreground: 0 0% 20%;
+
+    /* Muted elements */
+    --muted: 40 10% 94%;
+    --muted-foreground: 0 0% 45%;
+
+    /* Accent - slightly warmer */
+    --accent: 40 15% 92%;
+    --accent-foreground: 0 0% 15%;
+
+    /* Destructive */
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 40 20% 98%;
+
+    /* Borders - warm gray */
+    --border: 40 10% 88%;
+    --input: 40 10% 88%;
+    --ring: 18 45% 55%;
+
+    --radius: 0.5rem;
+
+    /* Sidebar */
+    --sidebar-background: 40 15% 97%;
+    --sidebar-foreground: 0 0% 20%;
+    --sidebar-primary: 18 45% 55%;
+    --sidebar-primary-foreground: 40 20% 98%;
+    --sidebar-accent: 40 10% 94%;
+    --sidebar-accent-foreground: 0 0% 15%;
+    --sidebar-border: 40 10% 90%;
+    --sidebar-ring: 18 45% 55%;
+
+    /* Custom tokens */
+    --surface-elevated: 40 20% 100%;
+    --text-primary: 0 0% 12%;
+    --text-secondary: 0 0% 45%;
+    --text-tertiary: 0 0% 60%;
+    --success: 145 45% 42%;
+    --success-foreground: 40 20% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 12%;
+    --info: 200 70% 45%;
+    --info-foreground: 40 20% 98%;
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 40 15% 95%;
+    --card: 0 0% 10%;
+    --card-foreground: 40 15% 95%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 40 15% 95%;
+    --primary: 18 50% 60%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 40 15% 95%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 40 10% 60%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 40 15% 95%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 40 20% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 18 50% 60%;
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 40 15% 90%;
+    --sidebar-primary: 18 50% 60%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 40 15% 95%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 18 50% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+    line-height: 1.25;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+
+  h4 {
+    @apply text-lg md:text-xl;
+  }
+}
+
+@layer components {
+  /* Container */
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Pacifico font for brand */
+  .font-brand {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+  }
+
+  /* Product card hover */
+  .product-card {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .product-card:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 12px 24px -8px hsl(var(--foreground) / 0.12);
+  }
+
+  /* Focus states for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  /* Badge styles */
+  .badge-personalised {
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full;
+    background-color: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+  }
+
+  /* Section spacing */
+  .section-spacing {
+    @apply py-16 md:py-20 lg:py-28;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply animate-pulse bg-muted rounded;
+  }
+
+  /* Glass effect */
+  .glass {
+    background: hsl(var(--background) / 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+@layer utilities {
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Subtle shadow */
+  .shadow-subtle {
+    box-shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.04), 
+                0 1px 2px -1px hsl(var(--foreground) / 0.04);
+  }
+
+  .shadow-card {
+    box-shadow: 0 2px 8px -2px hsl(var(--foreground) / 0.08), 
+                0 4px 16px -4px hsl(var(--foreground) / 0.06);
+  }
+
+  .shadow-elevated {
+    box-shadow: 0 8px 30px -4px hsl(var(--foreground) / 0.12), 
+                0 4px 10px -4px hsl(var(--foreground) / 0.08);
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Animation utilities */
+  .animate-slide-up {
+    animation: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(18 55% 45%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
