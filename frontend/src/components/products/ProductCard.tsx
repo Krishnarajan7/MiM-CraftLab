@@ -74,46 +74,46 @@ export function ProductCard({
         )}
       </div>
 
-      <div className="p-4">
-        <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
+      <div className="p-3 sm:p-4">
+        <p className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider mb-1">
           {category}
         </p>
-        <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors duration-200 line-clamp-2 min-h-[2.5rem]">
+        <h3 className="text-xs sm:text-sm font-medium text-foreground group-hover:text-primary transition-colors duration-200 line-clamp-2 min-h-[2rem] sm:min-h-[2.5rem]">
           {name}
         </h3>
         
         {/* Rating */}
-        <div className="flex items-center gap-1 mt-2">
+        <div className="flex items-center gap-0.5 sm:gap-1 mt-2">
           {[...Array(5)].map((_, i) => (
             <Star 
               key={i} 
-              className={`h-3 w-3 ${i < Math.floor(rating) ? 'fill-primary text-primary' : 'fill-muted text-muted'}`} 
+              className={`h-2.5 w-2.5 sm:h-3 sm:w-3 ${i < Math.floor(rating) ? 'fill-primary text-primary' : 'fill-muted text-muted'}`} 
             />
           ))}
-          <span className="text-xs text-muted-foreground ml-1">{rating.toFixed(1)}</span>
+          <span className="text-[10px] sm:text-xs text-muted-foreground ml-1">{rating.toFixed(1)}</span>
         </div>
 
         {/* Price and Add to Cart */}
-        <div className="mt-3 flex items-center justify-between gap-2">
-          <p className="text-lg font-bold text-foreground">
+        <div className="mt-2 sm:mt-3 flex items-center justify-between gap-1 sm:gap-2">
+          <p className="text-sm sm:text-lg font-bold text-foreground">
             £{price.toFixed(2)}
           </p>
           <Button
             onClick={handleAddToCart}
             size="sm"
             variant={isAddingToCart ? "default" : "outline"}
-            className="h-8 px-3 rounded-full text-xs"
+            className="h-7 sm:h-8 px-2 sm:px-3 rounded-full text-[10px] sm:text-xs"
             disabled={isAddingToCart}
           >
             {isAddingToCart ? (
               <span className="flex items-center gap-1">
-                <span className="text-sm">✓</span>
-                Added
+                <span className="text-xs sm:text-sm">✓</span>
+                <span className="hidden sm:inline">Added</span>
               </span>
             ) : (
-              <span className="flex items-center gap-1.5">
-                <ShoppingCart className="h-3.5 w-3.5" />
-                Add
+              <span className="flex items-center gap-1 sm:gap-1.5">
+                <ShoppingCart className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                <span className="hidden sm:inline">Add</span>
               </span>
             )}
           </Button>

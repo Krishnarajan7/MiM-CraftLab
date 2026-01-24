@@ -105,17 +105,21 @@ export const Header = memo(function Header() {
             </Button>
 
             {/* Account */}
-            <Button variant="ghost" size="icon" className="rounded-full hidden sm:flex h-9 w-9" aria-label="Account">
-              <User className="h-4 w-4" />
-            </Button>
+            <Link to="/dashboard">
+              <Button variant="ghost" size="icon" className="rounded-full hidden sm:flex h-9 w-9" aria-label="Account">
+                <User className="h-4 w-4" />
+              </Button>
+            </Link>
 
             {/* Cart */}
-            <Button variant="ghost" size="icon" className="relative rounded-full h-9 w-9" aria-label="Cart">
-              <ShoppingCart className="h-4 w-4" />
-              <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[10px] font-semibold text-primary-foreground flex items-center justify-center ring-2 ring-background">
-                0
-              </span>
-            </Button>
+            <Link to="/cart">
+              <Button variant="ghost" size="icon" className="relative rounded-full h-9 w-9" aria-label="Cart">
+                <ShoppingCart className="h-4 w-4" />
+                <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[10px] font-semibold text-primary-foreground flex items-center justify-center ring-2 ring-background">
+                  2
+                </span>
+              </Button>
+            </Link>
 
             {/* Mobile menu button */}
             <Button
