@@ -43,46 +43,49 @@ const featuredProducts = [
 
 export function FeaturedProducts() {
   return (
-    <section className="section-spacing bg-background">
-      <div className="container-page">
-        <ScrollReveal>
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-            <div>
-              <span className="text-sm font-medium text-primary uppercase tracking-wider">Shop Our Collection</span>
-              <h2 className="text-foreground mt-2">
-                Featured <span className="font-brand text-primary">Products</span>
-              </h2>
-              <p className="mt-3 text-muted-foreground max-w-md">
-                Our most popular 3D printed creations, handcrafted with love and precision
-              </p>
+    <section className="section-spacing w-full">
+      {/* Full-width background */}
+      <div className="w-full bg-gradient-to-b from-background via-muted/20 to-background">
+        <div className="container-page py-2">
+          <ScrollReveal>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 md:mb-10">
+              <div>
+                <span className="text-xs sm:text-sm font-medium text-primary uppercase tracking-wider">Shop Our Collection</span>
+                <h2 className="text-foreground mt-2 text-xl sm:text-2xl md:text-3xl">
+                  Featured <span className="font-brand text-primary">Products</span>
+                </h2>
+                <p className="mt-2 sm:mt-3 text-sm sm:text-base text-muted-foreground max-w-md">
+                  Our most popular 3D printed creations, handcrafted with love and precision
+                </p>
+              </div>
+              <motion.div whileHover={{ x: 5 }}>
+                <Button asChild variant="ghost" className="hidden sm:inline-flex group">
+                  <Link to="/shop">
+                    View all products
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+              </motion.div>
             </div>
-            <motion.div whileHover={{ x: 5 }}>
-              <Button asChild variant="ghost" className="hidden sm:inline-flex group">
-                <Link to="/shop">
-                  View all products
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
 
-        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6" staggerDelay={0.1}>
-          {featuredProducts.map((product) => (
-            <StaggerItem key={product.id}>
-              <ProductCard {...product} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+          <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6" staggerDelay={0.1}>
+            {featuredProducts.map((product) => (
+              <StaggerItem key={product.id}>
+                <ProductCard {...product} />
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
 
-        <ScrollReveal delay={0.3} className="mt-10 text-center sm:hidden">
-          <Button asChild variant="outline" className="rounded-full">
-            <Link to="/shop">
-              View all products
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </ScrollReveal>
+          <ScrollReveal delay={0.3} className="mt-8 md:mt-10 text-center sm:hidden">
+            <Button asChild variant="outline" className="rounded-full">
+              <Link to="/shop">
+                View all products
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   );

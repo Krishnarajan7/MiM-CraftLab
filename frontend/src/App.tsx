@@ -14,6 +14,8 @@ import Cart from "./pages/Cart";
 import Dashboard from "./pages/Dashboard";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import { ScrollToTop } from "./components/ScrollToTop";
+import FloatingNav from "./components/ui/floating-nav";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+      <ScrollToTop />
         <Layout>
           <Routes>
             <Route path="/" element={<Index />} />
@@ -39,6 +42,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
+        <FloatingNav />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

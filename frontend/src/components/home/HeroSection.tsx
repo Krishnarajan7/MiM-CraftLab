@@ -39,7 +39,10 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
+    <section className="relative overflow-hidden w-full">
+      {/* Full-width background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-muted/30" />
+      
       {/* Premium background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 opacity-[0.015]" style={{
@@ -61,9 +64,9 @@ export function HeroSection() {
       </div>
 
       {/* Full-width hero content */}
-      <div className="w-full">
-        <div className="container-page py-10 md:py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="relative w-full">
+        <div className="container-page py-8 sm:py-10 md:py-16 lg:py-24">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             {/* Content */}
             <motion.div 
               initial={{ opacity: 0 }}
@@ -76,10 +79,10 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/8 border border-primary/15 mb-5"
+                className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/8 border border-primary/15 mb-4 sm:mb-5"
               >
-                <Award className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Handcrafted 3D Prints</span>
+                <Award className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
+                <span className="text-xs sm:text-sm font-medium text-primary">Handcrafted 3D Prints</span>
               </motion.div>
 
               {/* Headline */}
@@ -89,19 +92,19 @@ export function HeroSection() {
                 transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
                 className="text-foreground"
               >
-                <span className="block text-sm md:text-base text-muted-foreground font-normal mb-2">
+                <span className="block text-xs sm:text-sm md:text-base text-muted-foreground font-normal mb-1 sm:mb-2">
                   Welcome to MimCraft Lab
                 </span>
-                <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">
                   Unique Creations for Your
                 </span>
-                <span className="relative inline-block mt-2">
-                  <span className="font-brand text-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Home</span>
+                <span className="relative inline-block mt-1 sm:mt-2">
+                  <span className="font-brand text-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">Home</span>
                   <motion.div 
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-                    className="absolute -bottom-1 left-0 right-0 h-1 bg-primary/30 rounded-full origin-left"
+                    className="absolute -bottom-0.5 sm:-bottom-1 left-0 right-0 h-0.5 sm:h-1 bg-primary/30 rounded-full origin-left"
                   />
                 </span>
               </motion.h1>
@@ -111,7 +114,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                className="mt-5 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed"
+                className="mt-3 sm:mt-5 text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed"
               >
                 Discover handcrafted 3D printed gifts, desk accessories, and home decor — each piece made with precision and care.
               </motion.p>
@@ -121,28 +124,28 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-                className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8 mt-6 py-4 border-y border-border/40"
+                className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 mt-4 sm:mt-6 py-3 sm:py-4 border-y border-border/40"
               >
                 <div>
-                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">500+</p>
-                  <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">Happy Customers</p>
+                  <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground">500+</p>
+                  <p className="text-[9px] sm:text-[10px] md:text-xs text-muted-foreground mt-0.5">Happy Customers</p>
                 </div>
-                <div className="w-px h-8 sm:h-10 bg-border/60" />
-                <div className="flex items-center gap-2">
+                <div className="w-px h-6 sm:h-8 md:h-10 bg-border/60" />
+                <div className="flex items-center gap-1.5 sm:gap-2">
                   <div className="flex items-center gap-0.5">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-3 sm:h-3.5 w-3 sm:w-3.5 fill-primary text-primary" />
+                      <Star key={i} className="h-2.5 sm:h-3 md:h-3.5 w-2.5 sm:w-3 md:w-3.5 fill-primary text-primary" />
                     ))}
                   </div>
                   <div>
-                    <p className="text-base sm:text-lg md:text-xl font-bold text-foreground">4.9</p>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground">Avg Rating</p>
+                    <p className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-foreground">4.9</p>
+                    <p className="text-[9px] sm:text-[10px] md:text-xs text-muted-foreground">Rating</p>
                   </div>
                 </div>
-                <div className="w-px h-8 sm:h-10 bg-border/60 hidden sm:block" />
+                <div className="w-px h-6 sm:h-8 md:h-10 bg-border/60 hidden sm:block" />
                 <div className="hidden sm:block">
-                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">UK</p>
-                  <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">Made & Shipped</p>
+                  <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground">UK</p>
+                  <p className="text-[9px] sm:text-[10px] md:text-xs text-muted-foreground mt-0.5">Made & Shipped</p>
                 </div>
               </motion.div>
 
@@ -151,18 +154,18 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-                className="mt-6 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3"
+                className="mt-4 sm:mt-6 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-3"
               >
-                <Button asChild size="lg" className="rounded-full px-6 sm:px-7 h-11 sm:h-12 text-sm shadow-lg shadow-primary/20 group">
+                <Button asChild size="lg" className="rounded-full px-5 sm:px-6 md:px-7 h-10 sm:h-11 md:h-12 text-xs sm:text-sm shadow-lg shadow-primary/20 group">
                   <Link to="/shop">
                     Browse Collection
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+                    <ArrowRight className="ml-1.5 sm:ml-2 h-3.5 sm:h-4 w-3.5 sm:w-4 group-hover:translate-x-0.5 transition-transform duration-200" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="rounded-full px-4 sm:px-5 h-11 sm:h-12 text-sm group border-border/60">
-                  <Link to="/courses" className="flex items-center justify-center gap-2">
-                    <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors duration-200">
-                      <Play className="h-3 sm:h-3.5 w-3 sm:w-3.5 text-primary ml-0.5" />
+                <Button asChild variant="outline" size="lg" className="rounded-full px-4 sm:px-5 h-10 sm:h-11 md:h-12 text-xs sm:text-sm group border-border/60">
+                  <Link to="/courses" className="flex items-center justify-center gap-1.5 sm:gap-2">
+                    <span className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors duration-200">
+                      <Play className="h-2.5 sm:h-3 md:h-3.5 w-2.5 sm:w-3 md:w-3.5 text-primary ml-0.5" />
                     </span>
                     Explore Courses
                   </Link>
@@ -178,7 +181,7 @@ export function HeroSection() {
               className="relative order-1 lg:order-2"
             >
               {/* Main image container */}
-              <div className="relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl shadow-foreground/8">
+              <div className="relative rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl shadow-foreground/8">
                 <div className="aspect-[4/3] lg:aspect-[5/4]">
                   <AnimatePresence mode="popLayout" initial={false}>
                     <motion.img
@@ -197,15 +200,15 @@ export function HeroSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/15 via-transparent to-transparent" />
 
                 {/* Image indicators */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2">
                   {heroProducts.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentIndex(index)}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                      className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 ${
                         index === currentIndex 
-                          ? "w-6 bg-white" 
-                          : "w-1.5 bg-white/50 hover:bg-white/70"
+                          ? "w-4 sm:w-6 bg-white" 
+                          : "w-1 sm:w-1.5 bg-white/50 hover:bg-white/70"
                       }`}
                       aria-label={`View product ${index + 1}`}
                     />
@@ -218,22 +221,21 @@ export function HeroSection() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="absolute bottom-12 left-4 sm:left-6 bg-background/95 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-medium text-foreground shadow-lg"
+                  className="absolute bottom-10 sm:bottom-12 left-3 sm:left-4 md:left-6 bg-background/95 backdrop-blur-sm rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium text-foreground shadow-lg"
                 >
                   {heroProducts[currentIndex].label}
                 </motion.div>
               </div>
-
 
               {/* Floating badge - New Arrivals */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
-                className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 lg:-top-4 lg:-right-4 bg-primary text-primary-foreground rounded-full px-3 sm:px-4 py-1.5 sm:py-2 shadow-lg flex items-center gap-1.5"
+                className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 lg:-top-4 lg:-right-4 bg-primary text-primary-foreground rounded-full px-2.5 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 shadow-lg flex items-center gap-1 sm:gap-1.5"
               >
-                <Zap className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                <span className="text-[10px] sm:text-xs font-semibold">New Arrivals</span>
+                <Zap className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-3.5 md:w-3.5" />
+                <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold">New Arrivals</span>
               </motion.div>
             </motion.div>
           </div>
