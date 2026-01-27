@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Heart, Star } from "lucide-react";
-import { motion } from "framer-motion";
+import { ShoppingCart, Heart, Star, Check } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 interface ProductCardProps {
@@ -12,6 +12,7 @@ interface ProductCardProps {
   category: string;
   isPersonalised?: boolean;
   rating?: number;
+  originalPrice?: number;
 }
 
 export function ProductCard({
@@ -22,6 +23,7 @@ export function ProductCard({
   category,
   isPersonalised,
   rating = 4.5 + Math.random() * 0.5,
+  originalPrice,
 }: ProductCardProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -30,7 +32,7 @@ export function ProductCard({
     e.preventDefault();
     e.stopPropagation();
     setIsAddingToCart(true);
-    setTimeout(() => setIsAddingToCart(false), 1000);
+    setTimeout(() => setIsAddingToCart(false), 2000);
   };
 
   const handleLike = (e: React.MouseEvent) => {
@@ -55,16 +57,22 @@ export function ProductCard({
         <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-300" />
         
         {/* Like button */}
-        <button
+        <motion.button
           onClick={handleLike}
+          whileTap={{ scale: 0.85 }}
           className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
             isLiked 
               ? 'bg-primary text-primary-foreground' 
               : 'bg-background/90 text-muted-foreground hover:text-primary opacity-0 group-hover:opacity-100'
           }`}
         >
-          <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
-        </button>
+          <motion.div
+            animate={isLiked ? { scale: [1, 1.3, 1] } : {}}
+            transition={{ duration: 0.3 }}
+          >
+            <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
+          </motion.div>
+        </motion.button>
 
         {/* Badges */}
         {isPersonalised && (
@@ -95,27 +103,64 @@ export function ProductCard({
 
         {/* Price and Add to Cart */}
         <div className="mt-2 sm:mt-3 flex items-center justify-between gap-1 sm:gap-2">
-          <p className="text-sm sm:text-lg font-bold text-foreground">
-            £{price.toFixed(2)}
-          </p>
+          <div className="flex items-center gap-2">
+            <p className="text-sm sm:text-lg font-bold text-foreground">
+              £{price.toFixed(2)}
+            </p>
+            {originalPrice && (
+              <p className="text-xs sm:text-sm text-muted-foreground line-through">
+                £{originalPrice.toFixed(2)}
+              </p>
+            )}
+          </div>
+          
+          {/* Animated Add to Cart Button */}
           <Button
             onClick={handleAddToCart}
             size="sm"
-            variant={isAddingToCart ? "default" : "outline"}
-            className="h-7 sm:h-8 px-2 sm:px-3 rounded-full text-[10px] sm:text-xs"
+            className={`h-8 w-8 sm:h-9 sm:w-9 p-0 rounded-full relative overflow-hidden transition-colors duration-300 ${
+              isAddingToCart 
+                ? 'bg-green-500 hover:bg-green-500' 
+                : 'bg-primary hover:bg-primary/90'
+            }`}
             disabled={isAddingToCart}
           >
-            {isAddingToCart ? (
-              <span className="flex items-center gap-1">
-                <span className="text-xs sm:text-sm">✓</span>
-                <span className="hidden sm:inline">Added</span>
-              </span>
-            ) : (
-              <span className="flex items-center gap-1 sm:gap-1.5">
-                <ShoppingCart className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                <span className="hidden sm:inline">Add</span>
-              </span>
-            )}
+            <AnimatePresence mode="wait">
+              {isAddingToCart ? (
+                <motion.div
+                  key="success"
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  exit={{ scale: 0, rotate: 180 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                  }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <Check className="h-4 w-4 text-white" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="cart"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ x: 20, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <motion.div
+                    whileHover={{ 
+                      x: [0, -2, 2, -2, 0],
+                      transition: { duration: 0.4, repeat: Infinity }
+                    }}
+                  >
+                    <ShoppingCart className="h-4 w-4 text-primary-foreground" />
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </Button>
         </div>
       </div>

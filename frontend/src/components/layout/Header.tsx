@@ -1,6 +1,6 @@
 import { useState, useEffect, memo } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, User, ShoppingCart, Truck, Home, BookOpen, Palette, Info, Mail,Tv, Sofa,Package,ChevronDown, } from "lucide-react";
+import { Search, User, ShoppingCart, Truck, Home, BookOpen, Palette, Info, Mail,Package, Gift,Sparkles,Star, LayoutGrid } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -15,15 +15,56 @@ const navigation = [
 ];
 
 const searchData: SearchItem[] = [
-  { id: "1", title: "Smart LED TV 55 inch", description: "4K Ultra HD Smart Television", category: "Electronics", icon: Tv, href: "/products?category=electronics" },
-  { id: "2", title: "Double Door Refrigerator", description: "500L Frost Free with Inverter", category: "Home Appliances", icon: Home, href: "/products?category=home-appliances" },
-  { id: "3", title: "Wooden Dining Table", description: "6 Seater Solid Wood Table", category: "Furnitures", icon: Sofa, href: "/products?category=furnitures" },
-  { id: "4", title: "Plastic Storage Containers", description: "Set of 12 Airtight Containers", category: "Plastic", icon: Package, href: "/products?category=plastic" },
-  { id: "5", title: "Front Load Washing Machine", description: "8kg Fully Automatic", category: "Home Appliances", icon: Home, href: "/products?category=home-appliances" },
-  { id: "6", title: "Air Conditioner 1.5 Ton", description: "Inverter Split AC 5 Star", category: "Electronics", icon: Tv, href: "/products?category=electronics" },
-  { id: "7", title: "Modular Sofa Set", description: "L-Shape Fabric Sofa", category: "Furnitures", icon: Sofa, href: "/products?category=furnitures" },
-  { id: "8", title: "Kitchen Organizer", description: "Plastic Multi-Purpose Rack", category: "Plastic", icon: Package, href: "/products?category=plastic" },
+  {
+    id: "1",
+    title: "3D Parrot Sculpture",
+    description: "Handcrafted colorful parrot art piece with detailed feathers",
+    category: "3D Art Gifts",
+    icon: Gift,
+    href: "/products?category=3d-art-gifts",
+  },
+  {
+    id: "2",
+    title: "Wooden Animal Sculpture",
+    description: "Premium hand-carved wooden decorative sculpture",
+    category: "Wooden Gifts",
+    icon: Package,
+    href: "/products?category=wooden-gifts",
+  },
+  {
+    id: "3",
+    title: "Luxury Tabletop Showpiece",
+    description: "Elegant 3D decorative showpiece for home & office",
+    category: "Home Decor",
+    icon: Home,
+    href: "/products?category=home-decor",
+  },
+  {
+    id: "4",
+    title: "Artisan Bird Figurine",
+    description: "Vibrant handcrafted bird figurine with modern finish",
+    category: "Handmade Gifts",
+    icon: Sparkles,
+    href: "/products?category=handmade-gifts",
+  },
+  {
+    id: "5",
+    title: "Premium Collectible Sculpture",
+    description: "Limited edition 3D collectible art sculpture",
+    category: "Collectibles",
+    icon: Star,
+    href: "/products?category=collectibles",
+  },
+  {
+    id: "6",
+    title: "Designer Table Decor",
+    description: "Modern artistic centerpiece for luxury interiors",
+    category: "Interior Decor",
+    icon: LayoutGrid,
+    href: "/products?category=interior-decor",
+  },
 ];
+
 
 // Animated hamburger component
 const AnimatedHamburger = memo(function AnimatedHamburger({ 

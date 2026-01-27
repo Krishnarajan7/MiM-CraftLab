@@ -204,9 +204,11 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  <Button size="lg" className="w-full mt-6 rounded-full h-12 text-sm shadow-lg shadow-primary/20">
-                    Proceed to Checkout
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                  <Button asChild size="lg" className="w-full mt-6 rounded-full h-12 text-sm shadow-lg shadow-primary/20">
+                    <Link to="/checkout">
+                      Proceed to Checkout
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
                   </Button>
 
                   {/* Trust badges */}

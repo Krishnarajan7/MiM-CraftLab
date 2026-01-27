@@ -12,10 +12,12 @@ import CustomOrders from "./pages/CustomOrders";
 import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Dashboard from "./pages/Dashboard";
+import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import { ScrollToTop } from "./components/ScrollToTop";
 import FloatingNav from "./components/ui/floating-nav";
+
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,7 @@ const App = () => (
             <Route path="/shop/:id" element={<ProductDetail />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/custom-orders" element={<CustomOrders />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/about" element={<About />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/dashboard" element={<Dashboard />} />

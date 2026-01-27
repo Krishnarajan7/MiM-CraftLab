@@ -2,17 +2,46 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Home, Search, ShoppingCart, User, Heart } from "lucide-react";
+import { Home, Search, ShoppingCart, User, Heart, Star, Gift } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { SearchModal, SearchItem } from "@/components/ui/search-modal";
 import { Tv, Sofa, Package } from "lucide-react";
 
 const searchData: SearchItem[] = [
-  { id: "1", title: "Smart LED TV 55 inch", description: "4K Ultra HD Smart Television", category: "Electronics", icon: Tv, href: "/products?category=electronics" },
-  { id: "2", title: "Double Door Refrigerator", description: "500L Frost Free with Inverter", category: "Home Appliances", icon: Home, href: "/products?category=home-appliances" },
-  { id: "3", title: "Wooden Dining Table", description: "6 Seater Solid Wood Table", category: "Furnitures", icon: Sofa, href: "/products?category=furnitures" },
-  { id: "4", title: "Plastic Storage Containers", description: "Set of 12 Airtight Containers", category: "Plastic", icon: Package, href: "/products?category=plastic" },
+  {
+    id: "1",
+    title: "3D Parrot Showpiece",
+    description: "Handcrafted colorful 3D parrot sculpture for home decor",
+    category: "3D Art Gifts",
+    icon: Gift,
+    href: "/products?category=3d-art-gifts",
+  },
+  {
+    id: "2",
+    title: "Wooden Bird Sculpture",
+    description: "Premium hand-carved wooden bird decorative piece",
+    category: "Wooden Gifts",
+    icon: Package,
+    href: "/products?category=wooden-gifts",
+  },
+  {
+    id: "3",
+    title: "Luxury Table Decor",
+    description: "Elegant 3D tabletop showpiece for modern interiors",
+    category: "Home Decor",
+    icon: Home,
+    href: "/products?category=home-decor",
+  },
+  {
+    id: "4",
+    title: "Artisan Collectible Figurine",
+    description: "Limited edition handcrafted 3D collectible gift item",
+    category: "Collectibles",
+    icon: Star,
+    href: "/products?category=collectibles",
+  },
 ];
+
 
 const FloatingNav = () => {
   const location = useLocation();
