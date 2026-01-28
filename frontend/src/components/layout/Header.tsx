@@ -1,10 +1,11 @@
 import { useState, useEffect, memo } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, User, ShoppingCart, Truck, Home, BookOpen, Palette, Info, Mail,Package, Gift,Sparkles,Star, LayoutGrid } from "lucide-react";
+import { Search, User, ShoppingCart, Truck, Home, BookOpen, Palette, Info, Mail, UserPlus, Gift, Package, Sparkles, Star, LayoutGrid, } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { SearchModal, SearchItem } from "@/components/ui/search-modal";
+import { IconTooltip } from "@/components/ui/icon-tooltip";
 
 const navigation = [
   { name: "Shop", href: "/shop", icon: ShoppingCart },
@@ -183,6 +184,7 @@ export const Header = memo(function Header() {
 
           {/* Right side actions */}
           <div className="flex items-center gap-1.5">
+
             {/* Search - Desktop */}
             <div className="hidden lg:flex items-center">
   <SearchModal data={searchData}>
@@ -207,21 +209,34 @@ export const Header = memo(function Header() {
             </Button> */}
 
             {/* Account */}
-            <Link to="/dashboard">
-              <Button variant="ghost" size="icon" className="rounded-full hidden sm:flex h-9 w-9" aria-label="Account">
-                <User className="h-4 w-4" />
-              </Button>
-            </Link>
+             <IconTooltip label="Account" className="hidden sm:flex">
+              <Link to="/dashboard">
+                <Button variant="ghost" size="icon" className="rounded-full h-9 w-9" aria-label="Account">
+                  <User className="h-4 w-4" />
+                </Button>
+              </Link>
+            </IconTooltip>
 
             {/* Cart */}
-            <Link to="/cart">
-              <Button variant="ghost" size="icon" className="relative rounded-full h-9 w-9" aria-label="Cart">
-                <ShoppingCart className="h-4 w-4" />
-                <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[10px] font-semibold text-primary-foreground flex items-center justify-center ring-2 ring-background">
-                  2
-                </span>
-              </Button>
-            </Link>
+            <IconTooltip label="Cart">
+              <Link to="/cart">
+                <Button variant="ghost" size="icon" className="relative rounded-full h-9 w-9" aria-label="Cart">
+                  <ShoppingCart className="h-4 w-4" />
+                  <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-[10px] font-semibold text-primary-foreground flex items-center justify-center ring-2 ring-background">
+                    2
+                  </span>
+                </Button>
+              </Link>
+            </IconTooltip>
+
+            {/* Sign Up */}
+            <IconTooltip label="Sign Up" className="hidden sm:flex">
+              <Link to="/auth">
+                <Button variant="ghost" size="icon" className="rounded-full h-9 w-9" aria-label="Sign Up">
+                  <UserPlus className="h-4 w-4" />
+                </Button>
+              </Link>
+            </IconTooltip>
 
             {/* Mobile menu button with animation */}
             <AnimatedHamburger 

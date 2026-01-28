@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Clock, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/products/ProductCard";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
 
 const dealProducts = [
   {
@@ -76,7 +77,7 @@ function CountdownTimer() {
         } else if (prev.hours > 0) {
           return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
         }
-        return { hours: 23, minutes: 59, seconds: 59 }; // Reset
+        return { hours: 23, minutes: 59, seconds: 59 };
       });
     }, 1000);
 
@@ -109,44 +110,43 @@ function CountdownTimer() {
 }
 
 export function TodaysDeals() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    slidesToScroll: 1,
+    containScroll: "trimSnaps",
+  });
   
-  // Number of products to show based on screen size
-  const getVisibleCount = () => {
-    if (typeof window !== 'undefined') {
-      if (window.innerWidth >= 1024) return 4;
-      if (window.innerWidth >= 768) return 3;
-      return 2;
-    }
-    return 4;
-  };
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
-  const [visibleCount, setVisibleCount] = useState(getVisibleCount());
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
 
   useEffect(() => {
-    const handleResize = () => setVisibleCount(getVisibleCount());
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    if (!emblaApi) return;
+    onSelect();
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
-  const maxIndex = Math.max(0, dealProducts.length - visibleCount);
-
-  const handlePrev = () => {
-    setDirection(-1);
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
-  };
-
-  const handleNext = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
-  };
-
-  const visibleProducts = dealProducts.slice(currentIndex, currentIndex + visibleCount);
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi]);
 
   return (
     <section className="w-full bg-gradient-to-b from-primary/5 to-background py-12 sm:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
@@ -181,8 +181,8 @@ export function TodaysDeals() {
             <Button
               variant="outline"
               size="icon"
-              onClick={handlePrev}
-              disabled={currentIndex === 0}
+              onClick={scrollPrev}
+              disabled={!canScrollPrev}
               className="h-10 w-10 rounded-full border-border hover:bg-accent disabled:opacity-40"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -190,8 +190,8 @@ export function TodaysDeals() {
             <Button
               variant="outline"
               size="icon"
-              onClick={handleNext}
-              disabled={currentIndex >= maxIndex}
+              onClick={scrollNext}
+              disabled={!canScrollNext}
               className="h-10 w-10 rounded-full border-border hover:bg-accent disabled:opacity-40"
             >
               <ChevronRight className="h-5 w-5" />
@@ -199,29 +199,28 @@ export function TodaysDeals() {
           </div>
         </div>
 
-        {/* Products Slider */}
-        <div className="relative">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {visibleProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                {...product}
-              />
+        {/* Products Slider with Embla */}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex -ml-4">
+            {dealProducts.map((product) => (
+              <div 
+                key={product.id} 
+                className="min-w-0 shrink-0 grow-0 basis-1/2 md:basis-1/3 lg:basis-1/4 pl-4"
+              >
+                <ProductCard {...product} />
+              </div>
             ))}
           </div>
         </div>
 
         {/* Progress Dots */}
         <div className="flex justify-center gap-2 mt-6">
-          {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+          {scrollSnaps.map((_, index) => (
             <button
               key={index}
-              onClick={() => {
-                setDirection(index > currentIndex ? 1 : -1);
-                setCurrentIndex(index);
-              }}
+              onClick={() => scrollTo(index)}
               className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex 
+                index === selectedIndex 
                   ? 'w-8 bg-primary' 
                   : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
               }`}

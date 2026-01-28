@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
 import { ScrollToTop } from "./components/ScrollToTop";
 import FloatingNav from "./components/ui/floating-nav";
 
@@ -28,23 +29,25 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
       <ScrollToTop />
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/shop/:id" element={<ProductDetail />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/custom-orders" element={<CustomOrders />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/account" element={<Dashboard />} />
-            <Route path="/contact" element={<Contact />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          {/* Auth routes without Layout */}
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/signin" element={<Auth />} />
+          <Route path="/signup" element={<Auth />} />
+          
+          {/* All other routes with Layout */}
+          <Route path="/" element={<Layout><Index /></Layout>} />
+          <Route path="/shop" element={<Layout><Shop /></Layout>} />
+          <Route path="/product/:id" element={<Layout><ProductDetail /></Layout>} />
+          <Route path="/cart" element={<Layout><Cart /></Layout>} />
+          <Route path="/checkout" element={<Layout><Checkout /></Layout>} />
+          <Route path="/about" element={<Layout><About /></Layout>} />
+          <Route path="/contact" element={<Layout><Contact /></Layout>} />
+          <Route path="/courses" element={<Layout><Courses /></Layout>} />
+          <Route path="/custom-orders" element={<Layout><CustomOrders /></Layout>} />
+          <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
+          <Route path="*" element={<Layout><NotFound /></Layout>} />
+        </Routes>
         <FloatingNav />
       </BrowserRouter>
     </TooltipProvider>
