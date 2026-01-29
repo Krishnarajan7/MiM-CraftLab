@@ -75,7 +75,7 @@ const TestimonialCard = ({ testimonial, delay }: { testimonial: Testimonial; del
 export const SignInPage: React.FC<SignInPageProps> = ({
   title,
   description,
-  heroImageSrc,
+  heroImageSrc = "/hero.png",
   testimonials = [],
   onSignIn,
   onGoogleSignIn,
@@ -244,10 +244,10 @@ export const SignInPage: React.FC<SignInPageProps> = ({
 
       {heroImageSrc && (
         <div
-          className="hidden lg:flex lg:w-[42%] relative overflow-hidden"
+          className="flex lg:w-[42%] relative overflow-hidden"
           style={{
             animation: 'slideRightIn 0.6s 0.2s forwards',
-            opacity: 0,
+            opacity: 1,
             filter: 'blur(4px)',
             transform: 'translateX(20px)',
           }}

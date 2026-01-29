@@ -26,20 +26,22 @@
     --popover-foreground: 0 0% 12%;
 
     /* Terracotta accent - warm, craft-like */
-    --primary: 18 45% 55%;
-    --primary-foreground: 40 20% 98%;
+    --primary: 359 47% 49%;
+--primary-foreground: 0 0% 98%;
+
 
     /* Soft neutral secondary */
-    --secondary: 40 10% 94%;
+    --secondary: 345 11% 93%;
     --secondary-foreground: 0 0% 20%;
 
     /* Muted elements */
-    --muted: 40 10% 94%;
-    --muted-foreground: 0 0% 45%;
+--muted: 345 8% 95%;
+--muted-foreground: 345 10% 40%;
 
-    /* Accent - slightly warmer */
-    --accent: 40 15% 92%;
-    --accent-foreground: 0 0% 15%;
+/* Accent */
+--accent: 345 15% 90%;
+--accent-foreground: 355 30% 25%;
+
 
     /* Destructive */
     --destructive: 0 65% 50%;
@@ -147,8 +149,9 @@
 @layer components {
   /* Container */
   .container-page {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
-  }
+  @apply mx-auto w-full max-w-[1300px] px-4 sm:px-6 lg:px-8;
+}
+
 
   /* Pacifico font for brand */
   .font-brand {
