@@ -1,16 +1,23 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { 
   Mail, 
   MessageSquare, 
   Clock, 
-  CheckCircle, 
   MapPin, 
   Phone,
   ArrowRight,
-  Send
+  Send,
+  Sparkles,
+  ShoppingBag,
+  FileText,
+  Wrench,
+  BookOpen
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
+import { AccordionComponent } from "@/components/ui/faq-accordion";
+import { motion } from "framer-motion";
 
 const contactMethods = [
   {
@@ -43,22 +50,30 @@ const contactMethods = [
   },
 ];
 
-const faqItems = [
+const quickLinks = [
   {
-    question: "What are your delivery times?",
-    answer: "Standard UK delivery takes 3-5 working days. Express delivery options are available at checkout.",
+    icon: ShoppingBag,
+    title: "Track Your Order",
+    description: "Check the status of your recent orders",
+    href: "/shop",
   },
   {
-    question: "Do you offer international shipping?",
-    answer: "Yes, we ship worldwide. International delivery typically takes 7-14 working days depending on location.",
+    icon: Wrench,
+    title: "Custom Orders",
+    description: "Request a bespoke 3D printed item",
+    href: "/custom-orders",
   },
   {
-    question: "Can I request custom modifications?",
-    answer: "Absolutely! Visit our Custom Orders page to submit your bespoke project requirements.",
+    icon: FileText,
+    title: "Returns Policy",
+    description: "Learn about our returns process",
+    href: "/shop",
   },
   {
-    question: "What is your returns policy?",
-    answer: "We offer a 30-day returns policy for unused items in original packaging. Custom orders are non-refundable.",
+    icon: BookOpen,
+    title: "Course Support",
+    description: "Get help with your enrolled courses",
+    href: "/courses",
   },
 ];
 
@@ -109,23 +124,57 @@ export default function Contact() {
   }
 
   return (
-    <div className="bg-background">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-muted/50 to-background border-b border-border">
-        <div className="container-page py-12 md:py-20">
-          <ScrollReveal>
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
-                Get in Touch
-              </h1>
-              <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Have a question or need assistance? Our dedicated team is here to help. 
-                We typically respond within 24 hours.
-              </p>
+    <div className="min-h-screen">
+      {/* Hero Banner - Shop Style */}
+      <div className="relative bg-gradient-to-br from-primary/10 via-background to-secondary/10 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.15),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--secondary)/0.1),transparent_50%)]" />
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-10 left-10 w-20 h-20 border border-primary/20 rounded-full animate-pulse" />
+        <div className="absolute bottom-10 right-20 w-32 h-32 border border-secondary/20 rounded-full" />
+        <div className="absolute top-1/2 right-10 w-2 h-2 bg-primary rounded-full" />
+        
+        <div className="container-page relative py-12 md:py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+              <Sparkles className="h-4 w-4" />
+              UK-Based Customer Support
             </div>
-          </ScrollReveal>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+              Get in
+              <span className="block font-brand text-primary mt-1">Touch</span>
+            </h1>
+            <p className="mt-6 text-lg text-muted-foreground max-w-lg">
+              Have a question or need assistance? Our dedicated team is here to help. 
+              We typically respond within 24 hours.
+            </p>
+            
+            {/* Quick Stats */}
+            <div className="flex items-center gap-8 mt-8">
+              <div className="text-center">
+                <p className="text-2xl font-bold text-foreground">24hr</p>
+                <p className="text-xs text-muted-foreground">Response Time</p>
+              </div>
+              <div className="h-8 w-px bg-border" />
+              <div className="text-center">
+                <p className="text-2xl font-bold text-foreground">9-5</p>
+                <p className="text-xs text-muted-foreground">GMT Hours</p>
+              </div>
+              <div className="h-8 w-px bg-border" />
+              <div className="text-center">
+                <p className="text-2xl font-bold text-foreground">4.9★</p>
+                <p className="text-xs text-muted-foreground">Support Rating</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </section>
+      </div>
 
       {/* Contact Methods Grid */}
       <section className="container-page py-12 md:py-16">
@@ -148,7 +197,7 @@ export default function Contact() {
         </StaggerContainer>
       </section>
 
-      {/* Main Content: Form + FAQ */}
+      {/* Main Content: Form + Quick Links */}
       <section className="bg-muted/30 border-y border-border">
         <div className="container-page py-16 md:py-20">
           <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
@@ -267,8 +316,8 @@ export default function Contact() {
               </div>
             </ScrollReveal>
 
-            {/* Sidebar: FAQ + Response Time - Takes 2 columns */}
-            <div className="lg:col-span-2 space-y-8">
+            {/* Sidebar: Response Time + Quick Links + Live Chat */}
+            <div className="lg:col-span-2 space-y-6">
               <ScrollReveal delay={0.1}>
                 <div className="bg-card border border-border rounded-2xl p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-6">
@@ -296,17 +345,25 @@ export default function Contact() {
                 </div>
               </ScrollReveal>
 
+              {/* Quick Links - Replaces FAQ in sidebar */}
               <ScrollReveal delay={0.2}>
                 <div className="bg-card border border-border rounded-2xl p-6 md:p-8">
-                  <h3 className="text-lg font-semibold text-foreground mb-6">
-                    Frequently Asked Questions
-                  </h3>
-                  <div className="space-y-5">
-                    {faqItems.map((faq) => (
-                      <div key={faq.question} className="pb-5 border-b border-border last:border-0 last:pb-0">
-                        <h4 className="text-sm font-medium text-foreground mb-2">{faq.question}</h4>
-                        <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                      </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-4">Quick Links</h3>
+                  <div className="space-y-3">
+                    {quickLinks.map((link) => (
+                      <Link
+                        key={link.title}
+                        to={link.href}
+                        className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors group"
+                      >
+                        <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors shrink-0">
+                          <link.icon className="h-4 w-4 text-primary" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{link.title}</p>
+                          <p className="text-xs text-muted-foreground">{link.description}</p>
+                        </div>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -329,6 +386,13 @@ export default function Contact() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Full Width FAQ Section - Moved to bottom */}
+      <section className="container-page py-16 md:py-20">
+        <ScrollReveal>
+          <AccordionComponent />
+        </ScrollReveal>
       </section>
     </div>
   );

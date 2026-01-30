@@ -13,6 +13,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
+import { motion } from "framer-motion";
 
 const processSteps = [
   {
@@ -99,37 +100,57 @@ export default function CustomOrders() {
   }
 
   return (
-    <div className="bg-background">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-muted/50 to-background border-b border-border">
-        <div className="container-page py-12 md:py-20">
-          <ScrollReveal>
-            <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-                <Sparkles className="h-4 w-4" />
-                Bespoke 3D Printing Services
+    <div className="min-h-screen">
+      {/* Hero Banner - Shop Style */}
+      <div className="relative bg-gradient-to-br from-primary/10 via-background to-secondary/10 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.15),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--secondary)/0.1),transparent_50%)]" />
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-10 left-10 w-20 h-20 border border-primary/20 rounded-full animate-pulse" />
+        <div className="absolute bottom-10 right-20 w-32 h-32 border border-secondary/20 rounded-full" />
+        <div className="absolute top-1/2 right-10 w-2 h-2 bg-primary rounded-full" />
+        
+        <div className="container-page relative py-12 md:py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+              <Sparkles className="h-4 w-4" />
+              Bespoke 3D Printing Services
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+              Bring Your Ideas
+              <span className="block font-brand text-primary mt-1">To Life</span>
+            </h1>
+            <p className="mt-6 text-lg text-muted-foreground max-w-lg">
+              From concept to creation, our expert team transforms your unique vision 
+              into high-quality 3D printed products, crafted with precision in the UK.
+            </p>
+            
+            {/* Quick Stats */}
+            <div className="flex items-center gap-8 mt-8">
+              <div className="text-center">
+                <p className="text-2xl font-bold text-foreground">48hr</p>
+                <p className="text-xs text-muted-foreground">Quote Turnaround</p>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
-                Bring Your Ideas to Life
-              </h1>
-              <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                From concept to creation, our expert team transforms your unique vision 
-                into high-quality 3D printed products, crafted with precision in the UK.
-              </p>
-              
-              {/* Trust Indicators */}
-              <div className="mt-8 flex flex-wrap justify-center gap-6">
-                {guarantees.map((item) => (
-                  <div key={item.label} className="flex items-center gap-2 text-muted-foreground">
-                    <item.icon className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium">{item.label}</span>
-                  </div>
-                ))}
+              <div className="h-8 w-px bg-border" />
+              <div className="text-center">
+                <p className="text-2xl font-bold text-foreground">100%</p>
+                <p className="text-xs text-muted-foreground">UK Based</p>
+              </div>
+              <div className="h-8 w-px bg-border" />
+              <div className="text-center">
+                <p className="text-2xl font-bold text-foreground">500+</p>
+                <p className="text-xs text-muted-foreground">Custom Projects</p>
               </div>
             </div>
-          </ScrollReveal>
+          </motion.div>
         </div>
-      </section>
+      </div>
 
       {/* Process Section */}
       <section className="container-page py-16 md:py-20">
