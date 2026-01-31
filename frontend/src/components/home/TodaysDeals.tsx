@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Clock, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/products/ProductCard";
@@ -60,11 +60,19 @@ const dealProducts = [
   },
 ];
 
-function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState({
-    hours: 23,
-    minutes: 59,
-    seconds: 59,
+// Memoized timer component to prevent re-renders from carousel
+const CountdownTimer = React.memo(function CountdownTimer() {
+  const [timeLeft, setTimeLeft] = useState(() => {
+    // Calculate time until midnight
+    const now = new Date();
+    const midnight = new Date(now);
+    midnight.setHours(24, 0, 0, 0);
+    const diff = midnight.getTime() - now.getTime();
+    return {
+      hours: Math.floor(diff / (1000 * 60 * 60)),
+      minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+      seconds: Math.floor((diff % (1000 * 60)) / 1000),
+    };
   });
 
   useEffect(() => {
@@ -84,30 +92,31 @@ function CountdownTimer() {
     return () => clearInterval(timer);
   }, []);
 
-  const TimeBlock = ({ value, label }: { value: number; label: string }) => (
-    <div className="flex flex-col items-center">
-      <motion.div 
-        key={value}
-        initial={{ y: -5, opacity: 0.5 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="bg-foreground text-background rounded-lg w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center font-bold text-lg sm:text-xl"
-      >
-        {String(value).padStart(2, '0')}
-      </motion.div>
-      <span className="text-xs text-muted-foreground mt-1">{label}</span>
-    </div>
-  );
-
   return (
     <div className="flex items-center gap-2 sm:gap-3">
-      <TimeBlock value={timeLeft.hours} label="Hours" />
+      <div className="flex flex-col items-center">
+        <div className="bg-foreground text-background rounded-lg w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center font-bold text-lg sm:text-xl">
+          {String(timeLeft.hours).padStart(2, '0')}
+        </div>
+        <span className="text-xs text-muted-foreground mt-1">Hours</span>
+      </div>
       <span className="text-foreground font-bold text-xl mb-4">:</span>
-      <TimeBlock value={timeLeft.minutes} label="Mins" />
+      <div className="flex flex-col items-center">
+        <div className="bg-foreground text-background rounded-lg w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center font-bold text-lg sm:text-xl">
+          {String(timeLeft.minutes).padStart(2, '0')}
+        </div>
+        <span className="text-xs text-muted-foreground mt-1">Mins</span>
+      </div>
       <span className="text-foreground font-bold text-xl mb-4">:</span>
-      <TimeBlock value={timeLeft.seconds} label="Secs" />
+      <div className="flex flex-col items-center">
+        <div className="bg-foreground text-background rounded-lg w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center font-bold text-lg sm:text-xl">
+          {String(timeLeft.seconds).padStart(2, '0')}
+        </div>
+        <span className="text-xs text-muted-foreground mt-1">Secs</span>
+      </div>
     </div>
   );
-}
+});
 
 export function TodaysDeals() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -146,7 +155,7 @@ export function TodaysDeals() {
 
   return (
     <section className="w-full bg-gradient-to-b from-primary/5 to-background py-12 sm:py-16">
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1540px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">

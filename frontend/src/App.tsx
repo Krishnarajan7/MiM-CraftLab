@@ -13,9 +13,11 @@ import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Dashboard from "./pages/Dashboard";
 import Checkout from "./pages/Checkout";
+import Wishlist from "./pages/Wishlist";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
+import { SimpleToastProvider } from "./components/ui/simple-toast";
 import { ScrollToTop } from "./components/ScrollToTop";
 import FloatingNav from "./components/ui/floating-nav";
 
@@ -25,6 +27,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <SimpleToastProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -41,6 +44,7 @@ const App = () => (
           <Route path="/product/:id" element={<Layout><ProductDetail /></Layout>} />
           <Route path="/cart" element={<Layout><Cart /></Layout>} />
           <Route path="/checkout" element={<Layout><Checkout /></Layout>} />
+          <Route path="/wishlist" element={<Layout><Wishlist /></Layout>} />
           <Route path="/about" element={<Layout><About /></Layout>} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
           <Route path="/courses" element={<Layout><Courses /></Layout>} />
@@ -50,6 +54,7 @@ const App = () => (
         </Routes>
         <FloatingNav />
       </BrowserRouter>
+      </SimpleToastProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

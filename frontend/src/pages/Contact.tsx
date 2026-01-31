@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Mail, 
   MessageSquare, 
@@ -17,7 +18,10 @@ import {
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
 import { AccordionComponent } from "@/components/ui/faq-accordion";
+import { RatingInteraction } from "@/components/ui/emoji-rating";
+import { useSimpleToast } from "@/components/ui/simple-toast";
 import { motion } from "framer-motion";
+import { useToast } from "../hooks/use-toast";
 
 const contactMethods = [
   {
@@ -78,6 +82,19 @@ const quickLinks = [
 ];
 
 export default function Contact() {
+  const { toast } = useToast();
+  const { showToast } = useSimpleToast();
+
+const handleRatingComplete = (rating:number) => {
+    const messages = [
+      "We're sorry to hear that. We'll work to improve!",
+      "Thanks for your feedback. We'll do better!",
+      "Thanks for rating us!",
+      "Great! Thanks for the positive feedback!",
+      "Awesome! We're thrilled you love it! 🎉"
+    ];
+    showToast(messages[rating - 1], rating >= 4 ? "success" : rating >= 3 ? "info" : "warning");
+  };
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -196,7 +213,22 @@ export default function Contact() {
           ))}
         </StaggerContainer>
       </section>
+      
+      {/* Rate Experience Section */}
+        <Card className="bg-transparent content-section mb-12 border-none shadow-none ring-none">
+          <CardContent className="py-8">
+            <div className="flex flex-col items-center gap-4">
+             <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground/60">
+  <span>
+    How was your <span className="font-brand text-primary">Experience</span>?
+  </span>
+</p>
 
+              <RatingInteraction onRatingComplete={handleRatingComplete} />
+              <div className="mt-2 h-px w-24 bg-gradient-to-r from-transparent via-border to-transparent" />
+            </div>
+          </CardContent>
+        </Card>
       {/* Main Content: Form + Quick Links */}
       <section className="bg-muted/30 border-y border-border">
         <div className="container-page py-16 md:py-20">

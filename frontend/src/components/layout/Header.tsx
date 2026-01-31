@@ -1,6 +1,6 @@
 import { useState, useEffect, memo } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, User, ShoppingCart, Truck, Home, BookOpen, Palette,Phone, Info, Mail, UserPlus, Gift, Package, Sparkles, Star, LayoutGrid, } from "lucide-react";
+import { Search, User, ShoppingCart, Truck, Home, BookOpen, Palette,Phone, Info, Mail, UserPlus, Gift, Package, Sparkles, Star, LayoutGrid, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -245,6 +245,18 @@ export const Header = memo(function Header() {
                 </Button>
               </Link>
             </IconTooltip>
+            
+            {/* Wishlist */}
+            <IconTooltip label="Wishlist" className="hidden sm:flex">
+              <Link to="/wishlist">
+                <Button variant="ghost" size="icon" className="relative rounded-full h-9 w-9" aria-label="Wishlist">
+                  <Heart className="h-4 w-4" />
+                  <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-destructive text-[10px] font-semibold text-destructive-foreground flex items-center justify-center ring-2 ring-background">
+                    4
+                  </span>
+                </Button>
+              </Link>
+            </IconTooltip>
 
             {/* Cart */}
             <IconTooltip label="Cart">
@@ -258,6 +270,7 @@ export const Header = memo(function Header() {
               </Link>
             </IconTooltip>
 
+
             {/* Sign Up */}
             <IconTooltip label="Sign Up" className="hidden sm:flex">
               <Link to="/auth">
@@ -266,6 +279,8 @@ export const Header = memo(function Header() {
                 </Button>
               </Link>
             </IconTooltip>
+
+            
 
             {/* Mobile menu button with animation */}
             <AnimatedHamburger 

@@ -53,17 +53,18 @@ const FloatingNav = () => {
   const items = [
     { id: 0, icon: Home, label: "Home", href: "/" },
     { id: 1, icon: Search, label: "Search", href: null, isSearch: true },
-    { id: 2, icon: Heart, label: "Wishlist", href: "/account" },
+    { id: 2, icon: Heart, label: "Wishlist", href: "/wishlist" },
     { id: 3, icon: ShoppingCart, label: "Cart", href: "/cart", badge: 3 },
-    { id: 4, icon: User, label: "Account", href: "/account" },
+    { id: 4, icon: User, label: "Account", href: "/dashboard" },
   ];
 
   // Set active based on current route
   useEffect(() => {
     const path = location.pathname;
     if (path === "/") setActive(0);
+    else if (path === "/wishlist") setActive(2);
     else if (path === "/cart") setActive(3);
-    else if (path === "/account") setActive(4);
+    else if (path === "/dashboard") setActive(4);
     else setActive(-1);
   }, [location.pathname]);
 
